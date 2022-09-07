@@ -14,7 +14,7 @@ const App = () => {
   const [bool, setBool] = useState(false);
   const [to, setTo] = useState("Lari");
   const [currencyValue, setCurrencyValue] = useState("");
-  const [apiKey,setApiKey] = useState("x8Ud8V4IASEMAz7aNkacCserl0rPGz33")
+  const [apiKey,setApiKey] = useState("GDtahe7j9ZRMj75hdTzYW7Lw365M48rq")
 
   useEffect(() => {
     

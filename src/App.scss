@@ -1,16 +1,15 @@
+@import "./assests/styles/colors";
+@import "./assests/styles/mixins";
 body{
     margin: 0;
     padding: 0;
     .App{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flexLayout(center,center,row);
         min-height: 100vh;
         .container {
-            display: flex;
+            @include flexLayout(flex-start,flex-start,column);
             width: 685px;
             max-width: 95vw;
-            flex-direction: column;
         }
     }
 }

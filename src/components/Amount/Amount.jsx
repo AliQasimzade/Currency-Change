@@ -15,45 +15,9 @@ const Amount = ({
   setCurrencyValue,
   to,
   setTo,
-  apiKey
+  apiKey,
 }) => {
   const currencyRef = useRef("");
-
-  const handleTypeNumber = (e) => {
-    currencyRef.current.value = e.target.value;
-    setCurrencyValue(currencyRef.current.value);
-    setTimeout(() => {
-      if (
-        currencyRef.current.value === 0 ||
-        currencyRef.current.value === " " ||
-        currencyRef.current.value === ""
-      ) {
-        setBool(false);
-      } else {
-        fetch(
-          `https://api.apilayer.com/exchangerates_data/convert?to=${toCurrency}&from=${fromCurrency}&amount=${currencyRef.current.value}&apikey=${apiKey}`
-        )
-          .then((res) => res.json())
-          .then((res) => {
-            setValue(res.result?.toFixed(2));
-            setTo(res.query?.to);
-            setBool(true);
-          })
-          .catch((err) => console.log(err.message));
-      }
-      // fetch(
-      //   `https://api.apilayer.com/exchangerates_data/latest?symbols=&base=${fromCurrency}&apikey=${apiKey}`
-      // )
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     console.log(res.query)
-      //     setValue(res.result?.toFixed(2));
-      //     setTo(res.query?.to);
-      //     setBool(true);
-      //   })
-      //   .catch((err) => console.log(err.message));
-    }, 500);
-  };
 
   const handleChangeCurrency = () => {
     if (currencyValue === 0 || currencyValue === "" || currencyValue === " ") {
@@ -61,13 +25,13 @@ const Amount = ({
       setBool(false);
     } else {
       fetch(
-        `https://api.apilayer.com/exchangerates_data/convert?to=${toCurrency}&from=${fromCurrency}&amount=${currencyValue}&apikey=${apiKey}`
+        `https://api.apilayer.com/exchangerates_data/convert?to=${toCurrency}&from=${fromCurrency}&amount=${currencyRef.current.value}&apikey=${apiKey}`
       )
         .then((res) => res.json())
         .then((res) => {
-          console.log(res)
-          setValue(res.result?.toFixed(2));
-          setTo(res.query?.to);
+          console.log(res);
+          setValue(res.result.toFixed(2));
+          setTo(res.query.to);
           setBool(true);
         })
         .catch((err) => console.log(err.message));
@@ -82,13 +46,19 @@ const Amount = ({
             type="number"
             ref={currencyRef}
             value={currencyValue}
-            onChange={(e) => handleTypeNumber(e)}
+            onChange={(e) => {
+              currencyRef.current.value = e.target.value;
+              setCurrencyValue(currencyRef.current.value);
+            }}
           />
           <Button onClick={handleChangeCurrency}>
             <img src={Refresh} alt="Refresh" />
           </Button>
         </div>
-        {bool ? (
+        {bool === true &&
+        (currencyValue !== "" ||
+          currencyValue !== " " ||
+          currencyValue !== 0) ? (
           <p>
             <span>{value}</span>
             {to}

@@ -13,8 +13,8 @@ const App = () => {
   const [value, setValue] = useState(0);
   const [bool, setBool] = useState(false);
   const [to, setTo] = useState("Lari");
-  const [currencyValue, setCurrencyValue] = useState("");
-  const [apiKey,setApiKey] = useState("GDtahe7j9ZRMj75hdTzYW7Lw365M48rq")
+  const [currencyValue, setCurrencyValue] = useState(1);
+  const [apiKey,setApiKey] = useState("EtFJyk6rMBxMkzLg15oyeomvfH6DBPgx")
 
   useEffect(() => {
     
@@ -35,6 +35,17 @@ const App = () => {
         setDataCurrencies(res.rates)
       })
       .catch((err) => console.log(err.message));
+      fetch(
+        `https://api.apilayer.com/exchangerates_data/convert?to=${toCurrency}&from=${fromCurrency}&amount=${currencyValue}&apikey=${apiKey}`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setValue(res.result.toFixed(2));
+          setTo(res.query.to);
+          setBool(true);
+        })
+        .catch((err) => console.log(err.message));
   }, [fromCurrency]);
   return (
     <div className="App">

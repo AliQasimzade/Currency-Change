@@ -29,7 +29,8 @@ const SelectInputs = ({
       if (
         currencyValue === 0 ||
         currencyValue === " " ||
-        currencyValue === ""
+        currencyValue === ""  ||
+        currencyValue < 0
       ) {
         setBool(false);
       } else {
@@ -60,12 +61,12 @@ const SelectInputs = ({
               `https://api.apilayer.com/exchangerates_data/convert?to=${
                 toCurrencyRef.current.value
               }&from=${fromCurrencyRef.current.value}&amount=${
-                currencyValue ? currencyValue : ""
+                currencyValue ? currencyValue : 1
               }&apikey=${apiKey}`
             )
               .then((res) => res.json())
               .then((res) => {
-                setValue(res.result?.toFixed(2));
+                setValue(res.result.toFixed(2));
                 setTo(res.query.to);
                 setBool(true);
               })
@@ -94,12 +95,12 @@ const SelectInputs = ({
               `https://api.apilayer.com/exchangerates_data/convert?to=${
                 toCurrencyRef.current.value
               }&from=${fromCurrencyRef.current.value}&amount=${
-                currencyValue ? currencyValue : ""
+                currencyValue ? currencyValue : 1
               }&apikey=${apiKey}`
             )
               .then((res) => res.json())
               .then((res) => {
-                setValue(res.result?.toFixed(2));
+                setValue(res.result.toFixed(2));
                 setTo(res.query.to);
                 setBool(true);
               })

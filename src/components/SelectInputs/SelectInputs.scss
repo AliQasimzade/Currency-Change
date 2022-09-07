@@ -1,4 +1,7 @@
 @import "../../assests/styles/font-face";
+@import "../../assests/styles/colors";
+@import "../../assests/styles/mixins";
+
 .select-inputs {
   display: flex;
   width: 685px;
@@ -7,21 +10,16 @@
   .select-buttons {
     width: 311px;
     height: 52px;
-    background: #ffffff;
-    box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
-    border-radius: 20px;
-    display: flex;
+    @include boxDesign($whiteColor,$boxShadowOne,20px); 
+    @include flexLayout(center,center,row);
     z-index: 3;
-    justify-content: center;
-    align-items: center;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     .select-option {
       width: 100%;
       border: none;
-      font-family: Roboto-Regular;
-      font-size: 18px;
+      @include fontDesign($blackColor,Roboto-Regular,18px);
       outline: none;
       appearance: none;
       position: relative;

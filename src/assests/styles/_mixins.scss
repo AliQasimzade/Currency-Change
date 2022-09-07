@@ -1,0 +1,18 @@
+@mixin flexLayout($alignItems,$justify,$flexDirection){
+    display: flex;
+    align-items: $alignItems;
+    justify-content: $justify;
+    flex-direction: $flexDirection;
+}
+
+@mixin boxDesign($background,$boxShadow,$borderRadius){
+    background: $background;
+    box-shadow: $boxShadow;
+    border-radius: $borderRadius;
+}
+
+@mixin fontDesign($color, $fontFamily, $fontSize){
+    color:$color;
+    font-family: $fontFamily;
+    font-size: $fontSize;
+}

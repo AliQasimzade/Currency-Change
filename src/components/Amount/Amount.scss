@@ -45,6 +45,13 @@
         border: none;
         outline: none;
         @include flexLayout(center,center,row);
+        transition: .4s ease-in-out;
+        &:hover{
+          img{
+            transform: rotate(180deg);
+            transition: .4s ease-in-out;
+          }
+        }
       }
     }
    

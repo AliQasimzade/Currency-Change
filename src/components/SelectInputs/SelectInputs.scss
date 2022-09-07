@@ -1,0 +1,50 @@
+@import "../../assests/styles/font-face";
+.select-inputs {
+  display: flex;
+  width: 685px;
+  max-width: 95vw;
+
+  .select-buttons {
+    width: 311px;
+    height: 52px;
+    background: #ffffff;
+    box-shadow: 3px 3px 10px rgba(14, 87, 214, 0.26);
+    border-radius: 20px;
+    display: flex;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    .select-option {
+      width: 100%;
+      border: none;
+      font-family: Roboto-Regular;
+      font-size: 18px;
+      outline: none;
+      appearance: none;
+      position: relative;
+      text-align: center;
+      height: 100%;
+      cursor: pointer;
+      display: inline-block;
+      z-index: 2;
+      background: transparent;
+    }
+    &::after {
+      content: url("../../assests/images/Arrow.png");
+      position: absolute;
+      top: 15px;
+      left: 85%;
+      z-index: 1;
+    }
+  }
+  button {
+    border: none;
+    outline: none;
+    background: none;
+    margin: 0 22px 0 22px;
+    cursor: pointer;
+  }
+}

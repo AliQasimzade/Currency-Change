@@ -1,0 +1,12 @@
+@media only screen and (max-width:500px){
+    .amount-container {
+        .amount{
+            padding-bottom: 16px;
+            .type-month{
+                button{
+                    width: 60px !important;
+                }
+            }
+        }
+    }
+}

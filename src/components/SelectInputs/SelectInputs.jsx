@@ -1,39 +1,120 @@
-import React, { useState } from "react";
-import ArrowImage from "../../assests/images/Arrow.png";
+import React, { useRef, useEffect } from "react";
 import ChangeCurrency from "../../assests/images/ChangeCurrency.png";
-import './SelectInputs.scss';
-const SelectInputs = () => {
-  const [option, setOption] = useState(0);
+import "./SelectInputs.scss";
+import "./SelectInputs-Media.scss";
+import Button from "@mui/material/Button";
+
+const SelectInputs = ({
+  data,
+  setFromCurrency,
+  toCurrency,
+  setToCurrency,
+  fromCurrency,
+  currencyValue,
+  to,
+  setTo,
+  bool,
+  setBool,
+  value,
+  setValue,
+  apiKey,
+}) => {
+  const fromCurrencyRef = useRef("");
+  const toCurrencyRef = useRef("");
+  useEffect(() => {}, [currencyValue]);
+  const changeCurrency = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+    setTimeout(() => {
+      if (
+        currencyValue === 0 ||
+        currencyValue === " " ||
+        currencyValue === ""
+      ) {
+        setBool(false);
+      } else {
+        fetch(
+          `https://api.apilayer.com/exchangerates_data/convert?to=${toCurrencyRef.current.value}&from=${fromCurrencyRef.current.value}&amount=${currencyValue}&apikey=${apiKey}`
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            setValue(res.result.toFixed(2));
+            setTo(res.query.to);
+            setBool(true);
+          })
+          .catch((err) => console.log(err.message));
+      }
+    }, 500);
+  };
   return (
     <div className="select-inputs">
       <div className="select-buttons">
         <select
           className="select-option"
-          onChange={(e) => setOption(e.target.value)}
+          ref={fromCurrencyRef}
+          value={fromCurrency}
+          onChange={(e) => {
+            fromCurrencyRef.current.value = e.target.value;
+            setFromCurrency(fromCurrencyRef.current.value);
+            fetch(
+              `https://api.apilayer.com/exchangerates_data/convert?to=${
+                toCurrencyRef.current.value
+              }&from=${fromCurrencyRef.current.value}&amount=${
+                currencyValue ? currencyValue : ""
+              }&apikey=${apiKey}`
+            )
+              .then((res) => res.json())
+              .then((res) => {
+                setValue(res.result?.toFixed(2));
+                setTo(res.query.to);
+                setBool(true);
+              })
+              .catch((err) => console.log(err.message));
+          }}
         >
-          <option value={0}>AZN</option>
-          <option value={1}>Dollar</option>
-          <option value={2}>TL</option>
-          <option value={3}>Euro</option>
-          <option value={4}>Rubl</option>
+          {data.length > 0 &&
+            data.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
         </select>
-        <img src={ArrowImage} alt="arrow" />
       </div>
-      <button>
+      <Button variant="text" onClick={changeCurrency}>
         <img src={ChangeCurrency} alt="changecurrency" />
-      </button>
+      </Button>
+
       <div className="select-buttons">
         <select
           className="select-option"
-          onChange={(e) => setOption(e.target.value)}
+          onChange={(e) => {
+            toCurrencyRef.current.value = e.target.value;
+            setToCurrency(toCurrencyRef.current.value);
+            fetch(
+              `https://api.apilayer.com/exchangerates_data/convert?to=${
+                toCurrencyRef.current.value
+              }&from=${fromCurrencyRef.current.value}&amount=${
+                currencyValue ? currencyValue : ""
+              }&apikey=${apiKey}`
+            )
+              .then((res) => res.json())
+              .then((res) => {
+                setValue(res.result?.toFixed(2));
+                setTo(res.query.to);
+                setBool(true);
+              })
+              .catch((err) => console.log(err.message));
+          }}
+          ref={toCurrencyRef}
+          value={toCurrency}
         >
-          <option value={0}>AZN</option>
-          <option value={1}>Dollar</option>
-          <option value={2}>TL</option>
-          <option value={3}>Euro</option>
-          <option value={4}>Rubl</option>
+          {data.length > 0 &&
+            data.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
         </select>
-        <img src={ArrowImage} alt="arrow" />
       </div>
     </div>
   );

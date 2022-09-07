@@ -1,0 +1,12 @@
+@media only screen and(max-width: 500px) {
+  .select-inputs {
+    .select-buttons {
+      &::after {
+        left: 80%;
+      }
+    }
+    button {
+      margin: 0 6px 0 6px;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import "../../assests/styles/font-face";
+.amount-container {
+  margin-top: 32px;
+  width: 685px;
+  max-width: 100%;
+  background: #ffffff;
+  box-shadow: 1px 1px 6px rgba(14, 87, 214, 0.26);
+  border-radius: 20px;
+  .amount {
+    width: 90%;
+    padding-bottom: 26px;
+    margin: 0 auto;
+    p {
+      font-size: 18px;
+      font-family: Roboto-Regular;
+      color: #000000;
+    }
+    .type-mount {
+      width: 609px;
+      height: 52px;
+      max-width: 100%;
+      background: #f2f2f2;
+      border: 0.5px solid rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      input {
+        outline: none;
+        border: none;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        padding-left: 8px;
+        font-family: Roboto-Regular;
+        &::-webkit-outer-spin-button {
+          appearance: none;
+        }
+        &::-webkit-inner-spin-button {
+          appearance: none;
+        }
+      }
+      button {
+        width: 96px;
+        background: #ffffff;
+        height: 100%;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+   
+  }
+}
